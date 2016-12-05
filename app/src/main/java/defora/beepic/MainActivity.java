@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void AlterarVolume() {
-
+        //teste github
         skb_Volume = (SeekBar) findViewById(R.id.skb_volume);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
