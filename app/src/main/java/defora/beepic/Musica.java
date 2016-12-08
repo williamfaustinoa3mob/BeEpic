@@ -44,7 +44,7 @@ public class Musica {
     public ArrayList<Integer> PreencherListViewMusica()
     {
         ArrayList<Integer> Musicas = new ArrayList<>();
-        Musicas.add(R.raw.taverna);
+        Musicas.add(1);
         return Musicas;
     }
 }
