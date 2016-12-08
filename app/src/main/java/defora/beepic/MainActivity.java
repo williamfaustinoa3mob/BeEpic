@@ -6,15 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SeekBar;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btn_Play;
     private Button btn_Pause;
     private Button btn_Stop;
+    private ListView lst_Musica;
     private Musica musicaAtual = new Musica();
+    private Integer musicaSelecionada;
 
     // Volume
     private SeekBar skb_Volume;
@@ -34,8 +41,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_Stop = (Button) findViewById(R.id.btn_stop) ;
         btn_Stop.setOnClickListener(this);
 
+        // Listview--
+        lst_Musica = (ListView) findViewById(R.id.lst_musica) ;
+        final ArrayList<Integer> arrayMusicas = musicaAtual.PreencherListViewMusica();
+        ArrayAdapter<Integer> adapterMusicas = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, arrayMusicas);
+        lst_Musica.setAdapter(adapterMusicas);
+
+        lst_Musica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                musicaSelecionada = arrayMusicas.get(position);
+            }
+        });
+        // Fim ListView--
+
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         AlterarVolume();
+
     }
 
     @Override
@@ -45,17 +67,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_play:
                 Log.i("MainLog","PLAY");
-                musicaAtual.Play(this,R.raw.taverna);
+                if (musicaSelecionada != null)
+                {
+                    musicaAtual.Play(this, musicaSelecionada);
+                }
                 break;
 
             case R.id.btn_pause:
                 Log.i("MainLog","PAUSE");
-                musicaAtual.Pause();
+                if (musicaSelecionada != null){
+                    musicaAtual.Pause();
+                }
                 break;
 
             case R.id.btn_stop:
                 Log.i("MainLog","STOP");
-                musicaAtual.Stop();
+                if (musicaSelecionada != null){
+                    musicaAtual.Stop();
+                }
                 break;
 
             default:

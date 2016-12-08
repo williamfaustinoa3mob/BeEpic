@@ -4,6 +4,8 @@ import android.media.MediaPlayer;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class Musica {
 
     private MediaPlayer musicaAtual;
@@ -37,5 +39,12 @@ public class Musica {
             musicaAtual.stop();
             musicaAtual = null; // Estou setando nulo para que force a criação do musicaAtual no método Play(), essa linha deve ser apagada depois que o MediaPlayer.create for movido para o método de seleção de músicas
         }
+    }
+
+    public ArrayList<Integer> PreencherListViewMusica()
+    {
+        ArrayList<Integer> Musicas = new ArrayList<>();
+        Musicas.add(R.raw.taverna);
+        return Musicas;
     }
 }
