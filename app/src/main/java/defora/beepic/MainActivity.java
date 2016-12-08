@@ -44,13 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Listview--
         lst_Musica = (ListView) findViewById(R.id.lst_musica) ;
         final ArrayList<Integer> arrayMusicas = musicaAtual.PreencherListViewMusica();
-        ArrayAdapter<Integer> adapterMusicas = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_1, arrayMusicas);
+        ArrayAdapter<Integer> adapterMusicas = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_checked, arrayMusicas);
         lst_Musica.setAdapter(adapterMusicas);
 
         lst_Musica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 musicaSelecionada = arrayMusicas.get(position);
+                musicaAtual.Stop();
             }
         });
         // Fim ListView--

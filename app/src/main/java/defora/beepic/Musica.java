@@ -44,7 +44,33 @@ public class Musica {
     public ArrayList<Integer> PreencherListViewMusica()
     {
         ArrayList<Integer> Musicas = new ArrayList<>();
-        Musicas.add(1);
+        Musicas.add(R.raw.aeroporto);
+        Musicas.add(R.raw.alarme);
+        Musicas.add(R.raw.alquimista);
+        Musicas.add(R.raw.arcade);
+        Musicas.add(R.raw.bar);
+        Musicas.add(R.raw.bar_de_jazz);
+        Musicas.add(R.raw.bar_vazio);
+        Musicas.add(R.raw.cidade_atual);
+        Musicas.add(R.raw.cidade_medieval);
+        Musicas.add(R.raw.escritorio);
+        Musicas.add(R.raw.esgoto);
+        Musicas.add(R.raw.fabrica);
+        Musicas.add(R.raw.fabrica2);
+        Musicas.add(R.raw.ferreiro);
+        Musicas.add(R.raw.hospital);
+        Musicas.add(R.raw.hospital_com_morte);
+        Musicas.add(R.raw.igreja);
+        Musicas.add(R.raw.lareira);
+        Musicas.add(R.raw.metro);
+        Musicas.add(R.raw.multidao);
+        Musicas.add(R.raw.multidao2);
+        Musicas.add(R.raw.porto);
+        Musicas.add(R.raw.prisao);
+        Musicas.add(R.raw.restaurante);
+        Musicas.add(R.raw.ritual);
+        Musicas.add(R.raw.tambor);
+        Musicas.add(R.raw.taverna);
         return Musicas;
     }
 }
