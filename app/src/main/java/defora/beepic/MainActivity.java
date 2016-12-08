@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Volume
     private SeekBar skb_Volume;
     private AudioManager audioManager;
-    private int maxVolume;
-    private int curVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //teste github
         skb_Volume = (SeekBar) findViewById(R.id.skb_volume);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        skb_Volume.setMax(maxVolume);
-        skb_Volume.setProgress(curVolume);
+        skb_Volume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        skb_Volume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
         skb_Volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     @Override
                     public void onStopTrackingTouch(SeekBar arg0) {
