@@ -1,8 +1,8 @@
 package defora.beepic;
 
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,13 +14,13 @@ import android.widget.SeekBar;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button btn_Play;
     private Button btn_Pause;
     private Button btn_Stop;
     private ListView lst_Musica;
-    private Musica musicaAtual = new Musica();
+    private Musica musicaAtual = new Musica("",0);
     private Integer musicaSelecionada;
 
     // Volume
@@ -42,15 +42,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_Stop.setOnClickListener(this);
 
         // Listview--
-        lst_Musica = (ListView) findViewById(R.id.lst_musica) ;
-        final ArrayList<Integer> arrayMusicas = musicaAtual.PreencherListViewMusica();
-        ArrayAdapter<Integer> adapterMusicas = new ArrayAdapter<Integer>(this, android.R.layout.simple_list_item_checked, arrayMusicas);
+        lst_Musica = (ListView) findViewById(R.id.list);
+
+        final ArrayList<Musica> arrayMusicas = musicaAtual.PreencherListViewMusica();
+
+        ArrayAdapter<Musica> adapterMusicas = new ArrayAdapter<Musica>(this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayMusicas);
+
         lst_Musica.setAdapter(adapterMusicas);
 
         lst_Musica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                musicaSelecionada = arrayMusicas.get(position);
+                musicaSelecionada = arrayMusicas.get(position).getIdMusica();
                 musicaAtual.Stop();
             }
         });

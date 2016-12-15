@@ -3,14 +3,31 @@ package defora.beepic;
 import android.media.MediaPlayer;
 import android.content.Context;
 import android.util.Log;
-
 import java.util.ArrayList;
 
 public class Musica {
 
+    public Integer idMusica;
+    public String nomeMusica;
     private MediaPlayer musicaAtual;
 
-    public void Play(Context c, int nomeMusica)
+    public Musica(String nomeRaw, Integer idRaw)
+    {
+        idMusica = idRaw;
+        nomeMusica = nomeRaw;
+    }
+
+    public Integer getIdMusica()
+    {
+        return  idMusica;
+    }
+
+    public String getNomeMusica()
+    {
+        return  nomeMusica;
+    }
+
+    public void Play(Context c, Integer nomeMusica)
     {
         Log.i("MusicaLog","MediaPlayer.create");
         // No futuro, o MediaPlayer.create terá que ser movido para o método de seleção de músicas
@@ -41,36 +58,37 @@ public class Musica {
         }
     }
 
-    public ArrayList<Integer> PreencherListViewMusica()
+    public ArrayList<Musica> PreencherListViewMusica()
     {
-        ArrayList<Integer> Musicas = new ArrayList<>();
-        Musicas.add(R.raw.aeroporto);
-        Musicas.add(R.raw.alarme);
-        Musicas.add(R.raw.alquimista);
-        Musicas.add(R.raw.arcade);
-        Musicas.add(R.raw.bar);
-        Musicas.add(R.raw.bar_de_jazz);
-        Musicas.add(R.raw.bar_vazio);
-        Musicas.add(R.raw.cidade_atual);
-        Musicas.add(R.raw.cidade_medieval);
-        Musicas.add(R.raw.escritorio);
-        Musicas.add(R.raw.esgoto);
-        Musicas.add(R.raw.fabrica);
-        Musicas.add(R.raw.fabrica2);
-        Musicas.add(R.raw.ferreiro);
-        Musicas.add(R.raw.hospital);
-        Musicas.add(R.raw.hospital_com_morte);
-        Musicas.add(R.raw.igreja);
-        Musicas.add(R.raw.lareira);
-        Musicas.add(R.raw.metro);
-        Musicas.add(R.raw.multidao);
-        Musicas.add(R.raw.multidao2);
-        Musicas.add(R.raw.porto);
-        Musicas.add(R.raw.prisao);
-        Musicas.add(R.raw.restaurante);
-        Musicas.add(R.raw.ritual);
-        Musicas.add(R.raw.tambor);
-        Musicas.add(R.raw.taverna);
+        ArrayList<Musica> Musicas = new ArrayList<>();
+        Musicas.add(new Musica("Aeroporto", R.raw.aeroporto));
+        Musicas.add(new Musica("alarme", R.raw.alarme));
+        Musicas.add(new Musica("alquimista", R.raw.alquimista));
+        Musicas.add(new Musica("arcade", R.raw.arcade));
+        Musicas.add(new Musica("bar", R.raw.bar));
+        Musicas.add(new Musica("bar_de_jazz", R.raw.bar_de_jazz));
+        Musicas.add(new Musica("bar_vazio", R.raw.bar_vazio));
+        Musicas.add(new Musica("cidade_atual", R.raw.cidade_atual));
+        Musicas.add(new Musica("cidade_medieval", R.raw.cidade_medieval));
+        Musicas.add(new Musica("escritorio", R.raw.escritorio));
+        Musicas.add(new Musica("esgoto", R.raw.esgoto));
+        Musicas.add(new Musica("fabrica", R.raw.fabrica));
+        Musicas.add(new Musica("fabrica2", R.raw.fabrica2));
+        Musicas.add(new Musica("ferreiro", R.raw.ferreiro));
+        Musicas.add(new Musica("hospital", R.raw.hospital));
+        Musicas.add(new Musica("hospital_com_morte", R.raw.hospital_com_morte));
+        Musicas.add(new Musica("igreja", R.raw.igreja));
+        Musicas.add(new Musica("lareira", R.raw.lareira));
+        Musicas.add(new Musica("metro", R.raw.metro));
+        Musicas.add(new Musica("multidao", R.raw.multidao));
+        Musicas.add(new Musica("multidao2", R.raw.multidao2));
+        Musicas.add(new Musica("porto", R.raw.porto));
+        Musicas.add(new Musica("prisao", R.raw.prisao));
+        Musicas.add(new Musica("restaurante", R.raw.restaurante));
+        Musicas.add(new Musica("ritual", R.raw.ritual));
+        Musicas.add(new Musica("tambor", R.raw.tambor));
+        Musicas.add(new Musica("taverna", R.raw.taverna));
+
         return Musicas;
     }
 }
