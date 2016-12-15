@@ -46,9 +46,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         final ArrayList<Musica> arrayMusicas = musicaAtual.PreencherListViewMusica();
 
-        ArrayAdapter<Musica> adapterMusicas = new ArrayAdapter<Musica>(this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayMusicas);
+        //ArrayAdapter<Musica> adapterMusicas = new ArrayAdapter<Musica>(this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayMusicas);
 
-        lst_Musica.setAdapter(adapterMusicas);
+        lst_Musica.setAdapter(new MusicaAdapter(this, arrayMusicas));
 
         lst_Musica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
