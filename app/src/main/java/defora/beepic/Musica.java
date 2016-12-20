@@ -3,6 +3,8 @@ package defora.beepic;
 import android.media.MediaPlayer;
 import android.content.Context;
 import android.util.Log;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Musica {
@@ -30,10 +32,12 @@ public class Musica {
     public void Play(Context c, Integer nomeMusica)
     {
         Log.i("MusicaLog","MediaPlayer.create");
-        // No futuro, o MediaPlayer.create terá que ser movido para o método de seleção de músicas
-        // Deixar esse código no método Play() faz com que o objeto seja recriado todas as vezes, atrapalhando na funcionalidade do método Pause()
+        // Este if serve para auxiliar o método Pause.
+        // O MediaPlayer.create faz com que o objeto seja criado todas as vezes que entra no método Play(),
+        // atrapalhando na funcionalidade do método Pause().
+        // Dessa forma o if valida se o objeto já foi criado, possibilitando que o método Pause() funcione normalmente
 
-        if (musicaAtual == null) { // Este if serve para auxiliar o método Pause. Quando o MediaPlayer.create for movido do Play(), esse if deverá ser apagado
+        if (musicaAtual == null) {
             musicaAtual = MediaPlayer.create(c, nomeMusica);
         }
 
@@ -61,33 +65,14 @@ public class Musica {
     public ArrayList<Musica> PreencherListViewMusica()
     {
         ArrayList<Musica> Musicas = new ArrayList<>();
-        Musicas.add(new Musica("aeroporto", R.raw.aeroporto));
-        Musicas.add(new Musica("alarme", R.raw.alarme));
-        Musicas.add(new Musica("alquimista", R.raw.alquimista));
-        Musicas.add(new Musica("arcade", R.raw.arcade));
-        Musicas.add(new Musica("bar", R.raw.bar));
-        Musicas.add(new Musica("bar_de_jazz", R.raw.bar_de_jazz));
-        Musicas.add(new Musica("bar_vazio", R.raw.bar_vazio));
-        Musicas.add(new Musica("cidade_atual", R.raw.cidade_atual));
-        Musicas.add(new Musica("cidade_medieval", R.raw.cidade_medieval));
-        Musicas.add(new Musica("escritorio", R.raw.escritorio));
-        Musicas.add(new Musica("esgoto", R.raw.esgoto));
-        Musicas.add(new Musica("fabrica", R.raw.fabrica));
-        Musicas.add(new Musica("fabrica2", R.raw.fabrica2));
-        Musicas.add(new Musica("ferreiro", R.raw.ferreiro));
-        Musicas.add(new Musica("hospital", R.raw.hospital));
-        Musicas.add(new Musica("hospital_com_morte", R.raw.hospital_com_morte));
-        Musicas.add(new Musica("igreja", R.raw.igreja));
-        Musicas.add(new Musica("lareira", R.raw.lareira));
-        Musicas.add(new Musica("metro", R.raw.metro));
-        Musicas.add(new Musica("multidao", R.raw.multidao));
-        Musicas.add(new Musica("multidao2", R.raw.multidao2));
-        Musicas.add(new Musica("porto", R.raw.porto));
-        Musicas.add(new Musica("prisao", R.raw.prisao));
-        Musicas.add(new Musica("restaurante", R.raw.restaurante));
-        Musicas.add(new Musica("ritual", R.raw.ritual));
-        Musicas.add(new Musica("tambor", R.raw.tambor));
-        Musicas.add(new Musica("taverna", R.raw.taverna));
+
+        // Esse for each serve para verificar todos os arquivos da pasta R.raw e adiciona-los no objeto Música
+        Field[] fields = R.raw.class.getFields();
+        for(Field f : fields)
+            try {
+                Musicas.add(new Musica(f.getName(), f.getInt(null)));
+            } catch (IllegalArgumentException e) {
+            } catch (IllegalAccessException e) { }
 
         return Musicas;
     }
