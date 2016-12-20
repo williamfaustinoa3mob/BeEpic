@@ -1,16 +1,12 @@
 package defora.beepic;
 
 import android.app.Activity;
-import android.content.Context;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SeekBar;
 
 import java.util.ArrayList;
 
@@ -22,10 +18,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private ListView lst_Musica;
     private Musica musicaAtual = new Musica("",0);
     private Integer musicaSelecionada;
-
-    // Volume
-    private SeekBar skb_Volume;
-    private AudioManager audioManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +37,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         lst_Musica = (ListView) findViewById(R.id.list);
 
         final ArrayList<Musica> arrayMusicas = musicaAtual.PreencherListViewMusica();
-
-        //ArrayAdapter<Musica> adapterMusicas = new ArrayAdapter<Musica>(this, android.R.layout.simple_list_item_1, android.R.id.text1, arrayMusicas);
-
         lst_Musica.setAdapter(new MusicaAdapter(this, arrayMusicas));
 
         lst_Musica.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -58,9 +47,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         });
         // Fim ListView--
-
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        AlterarVolume();
 
     }
 
@@ -95,28 +81,4 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
-
-    private void AlterarVolume() {
-        //teste github
-        skb_Volume = (SeekBar) findViewById(R.id.skb_volume);
-        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        skb_Volume.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        skb_Volume.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
-        skb_Volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onStopTrackingTouch(SeekBar arg0) {
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar arg0) {
-
-                    }
-
-                    @Override
-                    public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
-                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, arg1, 0);
-                    }
-                });
-    }
-
 }
